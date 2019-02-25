@@ -55,7 +55,7 @@ userSchema.methods.generateAuthToken = function () {
 userSchema.methods.toJSON = function () {
     const user = this;
     const userObject = user.toObject();
-    const updatedUser = _.pick(userObject, ['email'])
+    const updatedUser = _.pick(userObject, ['email', 'screenName'])
     updatedUser.token = userObject.tokens[userObject.tokens.length - 1].token
     return updatedUser
 }
