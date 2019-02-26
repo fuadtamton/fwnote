@@ -17,10 +17,6 @@ const Notes = mongoose.model('Notes', {
     creator_Id: {
         required: true,
         type: mongoose.Schema.Types.ObjectId
-    },
-    favourite: {
-        type: Boolean,
-        default: false
     }
 })
 

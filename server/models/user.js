@@ -92,11 +92,19 @@ userSchema.statics.findByToken = function (token) {
     return res
 }
 
+userSchema.statics.findByEmail = function (email) {
+    const User = this;
+    return User.findOne({ email }).then(res => {
+        return res
+    })
+}
+
+
 userSchema.statics.findByCreditionals = function (email, password) {
     const User = this;
     return User.findOne({ email }).then(user => {
         if (!user) {
-            throw new Error('email does not exist')
+            return Promise.reject('email does not exist')
         }
         return new Promise((resolve, reject) => {
             bcrypt.compare(password, user.password, (err, res) => {

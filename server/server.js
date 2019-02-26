@@ -1,20 +1,19 @@
-const express = require('express');
-var cors=require('cors');
+var cors = require('cors');
 const bodyParser = require('body-parser');
+const express = require('express');
 
-require('./db/mongoose');
-
+const users = require('./api/users');
+const notes = require('./api/notes');
+const { jsonSchema } = require('./middleware/jsonSchemaMiddleware');
 const app = express()
-app.use(cors())
+
 app.use(bodyParser.json())
-
-
+app.use('/api/v1/auth', users);
+app.use('/api/v1/notes', notes);
+app.use(jsonSchema);
+app.use(cors());
 
 
 app.listen(3002, () => {
     console.log("Server is up on port 3002")
 })
-module.exports={ app }
-
-require('./users')
-require('./notes')
